@@ -1,13 +1,15 @@
 import os
 import pyautogui
 import time
-import cv2
+from cv2 import imread,matchTemplate,TM_SQDIFF,minMaxLoc,rectangle,resize,imshow,waitKey,destroyAllWindows
+
+
 
 def ifstart():
     tempFile = "picture\\begin.png"
     pyautogui.screenshot('big.png')
-    gray = cv2.imread("big.png", 0)
-    img_template = cv2.imread(tempFile, 0)
+    gray = imread("big.png", 0)
+    img_template = imread(tempFile, 0)
 
     os.remove("big.png")
 
@@ -15,11 +17,11 @@ def ifstart():
 
 def imgAutoCick(tempFile, whatDo, debug=False):
     pyautogui.screenshot('big.png')
-    gray = cv2.imread("big.png", 0)
-    img_template = cv2.imread(tempFile, 0)
+    gray = imread("big.png", 0)
+    img_template = imread(tempFile, 0)
     w, h = img_template.shape[::-1]
-    res = cv2.matchTemplate(gray, img_template, cv2.TM_SQDIFF)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+    res = matchTemplate(gray, img_template, TM_SQDIFF)
+    min_val, max_val, min_loc, max_loc = minMaxLoc(res)
     top = min_loc[0]
     left = min_loc[1]
     x = [top, left, w, h]
@@ -29,12 +31,12 @@ def imgAutoCick(tempFile, whatDo, debug=False):
     whatDo(x)
 
     if debug:
-        img = cv2.imread("big.png", 1)
-        cv2.rectangle(img, top_left, bottom_right, (0, 0, 255), 2)
-        img = cv2.resize(img, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_NEAREST)
-        cv2.imshow("processed", img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        img = imread("big.png", 1)
+        rectangle(img, top_left, bottom_right, (0, 0, 255), 2)
+        img = resize(img, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_NEAREST)
+        imshow("processed", img)
+        waitKey(0)
+        destroyAllWindows()
     os.remove("big.png")
 
 

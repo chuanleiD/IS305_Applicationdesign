@@ -1,5 +1,5 @@
 开学日期：20220214
-课程信息是否写入：1
 课程txt信息路径：course_txt\course.txt
 腾讯会议exe路径：C:\软件\腾讯会议\WeMeet\wemeetapp.exe
 腾讯会议打开时间：5
+课程状态：已写入

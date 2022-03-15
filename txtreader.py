@@ -7,7 +7,7 @@ def readtxt(filename="course_txt\\course.txt"):
     course_num = -1
     week = "星期一"
     time = "1-2"
-    with open(filename, encoding='gbk') as read_file:  # 打开文件
+    with open(filename, encoding='utf-8') as read_file:  # 打开文件
         for line in read_file:
             line = line.strip('\n')
             if len(line) != 0:

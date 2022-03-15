@@ -23,6 +23,8 @@ def decide_course(college_start='20220214'):
         if i == 0 and localtime < course_time(course[3]):
             mycourse = course
             break
+        elif i == len(list2) - 1:
+            mycourse = list2[i]
         elif localtime > course_time(course[3]) and localtime < course_time(list2[i+1][3]):
             mycourse = list2[i+1]
 
