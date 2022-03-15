@@ -18,6 +18,11 @@ def decide_course(college_start='20220214'):
             if course[9] == 0 or (course[9] == 1 and week_now//2 == 1) or (course[9] == 2 and week_now//2 == 0):
                 list2.append(course)
 
+    if len(list2) > 0:
+        mycourse = list2[0]
+    else:
+        mycourse = mylist[0]
+
     for i in range(0, len(list2), 1):
         course = list2[i]
         if i == 0 and localtime < course_time(course[3]):

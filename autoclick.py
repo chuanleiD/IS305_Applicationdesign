@@ -1,7 +1,7 @@
 import os
 import pyautogui
 import time
-from cv2 import imread,matchTemplate,TM_SQDIFF,minMaxLoc,rectangle,resize,imshow,waitKey,destroyAllWindows
+from cv2 import imread,matchTemplate,TM_SQDIFF,minMaxLoc,rectangle,resize,imshow,waitKey,destroyAllWindows,INTER_NEAREST
 
 
 
@@ -33,7 +33,7 @@ def imgAutoCick(tempFile, whatDo, debug=False):
     if debug:
         img = imread("big.png", 1)
         rectangle(img, top_left, bottom_right, (0, 0, 255), 2)
-        img = resize(img, (0, 0), fx=0.5, fy=0.5, interpolation=cv2.INTER_NEAREST)
+        img = resize(img, (0, 0), fx=0.5, fy=0.5, interpolation=INTER_NEAREST)
         imshow("processed", img)
         waitKey(0)
         destroyAllWindows()
