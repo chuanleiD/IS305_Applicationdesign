@@ -23,13 +23,14 @@ def readtxt(filename="course_txt\\course.txt"):
                     if line == "星期五":
                         mystr = "5"
                     week = mystr
+
                 if line.find("-") != -1 and len(line) < 10:
                     time = line
-                if line.find("◇") != -1:
+                if (line.find("◇") != -1 or line.find("●") != -1 or line.find("○") != -1 or line.find("★") != -1 or line.find("▲") != -1 or line.find("☆") != -1) and len(line) < 20:
                     course_list.append(week + "@" + time + "@" + line)
                     course_num += 1
-                if line.find("周数") != -1:
-                    course_list[course_num] = course_list[course_num] + line
+                if line.find("周数：") != -1:
+                    course_list[course_num] = course_list[course_num] + line[line.find("周数："):]
     read_file.close()
 
     return course_list
@@ -45,7 +46,23 @@ def get_db(filename="course_txt\\course.txt"):
         end_time = int(course[course.find("-")+1:course.find("\t")])
 
         c1 = course.find("@")
-        course_name = course[course.find("@", c1+1)+1:course.find("◇")]
+
+        if course.find("◇") != -1:
+            thisstr = "◇"
+        elif course.find("●") != -1:
+            thisstr = "●"
+        elif course.find("○") != -1:
+            thisstr = "○"
+        elif course.find("★") != -1:
+            thisstr = "★"
+        elif course.find("▲") != -1:
+            thisstr = "▲"
+        elif course.find("☆") != -1:
+            thisstr = "☆"
+        else:
+            thisstr = "◇"
+
+        course_name = course[course.find("@", c1+1)+1:course.find(thisstr)]
 
         s1 = course.find("周数")
         s2 = course.find("-", s1, s1+6)

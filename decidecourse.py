@@ -2,7 +2,7 @@ import database
 import gettime
 
 def course_time(a):
-    b = [0, 480, 535, 600, 655, 720, 775, 840, 895, 960, 1015, 1080, 1135, 1175]
+    b = [0, 480, 535, 600, 655, 720, 775, 840, 895, 960, 1015, 1080, 1135, 1175, 1220, 1275]
     return b[a]
 
 
@@ -18,6 +18,7 @@ def decide_course(college_start='20220214'):
             if course[9] == 0 or (course[9] == 1 and week_now//2 == 1) or (course[9] == 2 and week_now//2 == 0):
                 list2.append(course)
 
+    print(list2)
     if len(list2) > 0:
         mycourse = list2[0]
     else:
