@@ -59,12 +59,3 @@ def signIn(meeting_id, meeting_key, wait_time=5, app_address="C:\软件\腾讯�
     imgAutoCick("picture\\final2.png", pyautogui.click, False)
     time.sleep(0.5)
 
-'''
-#signIn("648289912", "6080")
-
-tempFile = "picture\\joinbtn.png"
-img_template = imread(tempFile, 0)
-
-for i in img_template:
-    print(i)
-'''

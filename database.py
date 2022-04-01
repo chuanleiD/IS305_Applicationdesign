@@ -1,7 +1,8 @@
 import sqlite3
 
+#写入课程信息
 def insert(insert_data):
-      db_file = r"course_data.db"
+      db_file = "配置文件\\course_data.db"
 
       conn = sqlite3.connect(db_file)
       cur = conn.cursor()
@@ -17,8 +18,28 @@ def insert(insert_data):
 
 #insert([("操作系统", 1, 2. 1, 9, 16, "576409879", "2932", 0)])
 
+
+#写入会议信息
+def meeting_insert(data):
+      db_file = "配置文件\\meeting_data.db"
+
+      conn = sqlite3.connect(db_file)
+      cur = conn.cursor()
+
+
+      sql = 'insert into meeting_data (start_time, day_time, meeting_number, meeting_password)' \
+            'values(?,?,?,?)'
+      cur.execute(sql, data)
+
+      conn.commit()
+      cur.close()
+      conn.close()
+
+
+
+#读取课程信息
 def read_db():
-      db_file = r"course_data.db"
+      db_file = "配置文件\\course_data.db"
 
       conn = sqlite3.connect(db_file)
       cur = conn.cursor()
@@ -35,7 +56,23 @@ def read_db():
       return val
 
 
+#读取课程信息
+def meeting_read_db():
+      db_file = "配置文件\\meeting_data.db"
 
+      conn = sqlite3.connect(db_file)
+      cur = conn.cursor()
+
+      sql = 'SELECT * from meeting_data'
+      values = cur.execute(sql)
+      val = values.fetchall()
+
+      conn.commit()
+      cur.close()
+      conn.close()
+
+      #val = [(780, '20220330', '297764075', '111111')]
+      return val
 
 
 

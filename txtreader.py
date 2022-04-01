@@ -1,7 +1,7 @@
 import database
 
-
-def readtxt(filename="course_txt\\course.txt"):
+# 从txt文件获得课程内容
+def readtxt(filename="配置文件\\course.txt"):
 
     course_list = []
     course_num = -1
@@ -38,7 +38,9 @@ def readtxt(filename="course_txt\\course.txt"):
 
 #print(readtxt())
 
-def get_db(filename="course_txt\\course.txt"):
+
+# 将txt文件中的内容写入DB文件
+def get_db(filename="配置文件\\course.txt"):
     mylist = readtxt(filename)
     data = []
     for course in mylist:
@@ -91,4 +93,36 @@ def get_db(filename="course_txt\\course.txt"):
         data.append(a)
     database.insert(data)
     #insert([("操作系统", 1, 1, 9, 16, "576409879", "2932", 0),("数据挖掘", 3, 1, 9, 16, "149716380", "8419", 0)])
+
+
+
+#读入会议信息
+def meeting_reader(filepath = "配置文件\\meeting.txt"):
+
+    meeting_date = 20220101
+    meeting_time = 100
+    number = "111111111"
+    password = "000000"
+
+    with open(filepath, encoding="utf-8") as readfile:
+        for line in readfile:
+            line = line.strip("\n")
+            if (line.find("会议时间") != -1):
+                meeting_date = line[5:9] + line[10:12] + line[13:15]
+                meeting_time = int(line[16:18])*60 + int(line[19:21])
+            elif(line.find(r"#腾讯会议") != -1):
+                number = line[6:9] + line[10:13] + line[14:17]
+            elif (line.find("会议密码") != -1):
+                password = line[5:-1] + line[-1]
+
+    data = [meeting_time, meeting_date, number, password]
+    database.meeting_insert(data)
+    return([meeting_time, meeting_date, number, password])
+
+
+
+
+
+
+
 

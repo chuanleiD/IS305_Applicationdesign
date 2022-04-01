@@ -1,11 +1,14 @@
 import database
 import gettime
 
+
+# 课程号映射到分钟型时间
 def course_time(a):
     b = [0, 480, 535, 600, 655, 720, 775, 840, 895, 960, 1015, 1080, 1135, 1175, 1220, 1275]
     return b[a]
 
 
+# 决定课程打开哪个
 def decide_course(college_start='20220214'):
     mylist = database.read_db()
     week_now = gettime.get_week(college_start)
@@ -41,6 +44,25 @@ def decide_course(college_start='20220214'):
     return mycourse
 
 #a = (course_name, start_time, end_time, weekday, start_week, end_week, meeting_number, meeting_password, single_or_double_week)
+
+
+
+# 决定会议打开哪个
+def decide_meeting():
+    mylist = database.meeting_read_db()
+    result = 0
+    today = gettime.get_day()
+    mytime = database.get_time()
+
+    mymeeting = mylist[0]
+    for meeting in mylist:
+        if meeting[2] == today and meeting[1]-mytime < 10:
+            mymeeting = meeting
+            result = 1
+            break
+
+    return [result, mymeeting]
+
 
 
 
