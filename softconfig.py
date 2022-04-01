@@ -35,5 +35,3 @@ def write(app_address):
         f.write(mylist)  # 自带文件关闭功能，不需要再写f.close()
 
 
-
-

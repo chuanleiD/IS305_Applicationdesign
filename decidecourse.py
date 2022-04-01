@@ -13,16 +13,18 @@ def decide_course(college_start='20220214'):
     weekday = gettime.get_weekday()
 
     list2 = []
+    mycourse = mylist[0]
     for course in mylist:
         if course[4] == weekday and week_now >= course[5] and week_now <= course[6]:
-            if course[9] == 0 or (course[9] == 1 and week_now//2 == 1) or (course[9] == 2 and week_now//2 == 0):
+            if course[9] == 0 or (course[9] == 1 and week_now % 2 == 1) or (course[9] == 2 and week_now % 2 == 0):
                 list2.append(course)
 
-    print(list2)
+    #print(list2)
     if len(list2) > 0:
         mycourse = list2[0]
     else:
         mycourse = mylist[0]
+
 
     for i in range(0, len(list2), 1):
         course = list2[i]
@@ -31,8 +33,10 @@ def decide_course(college_start='20220214'):
             break
         elif i == len(list2) - 1:
             mycourse = list2[i]
-        elif localtime > course_time(course[3]) and localtime < course_time(list2[i+1][3]):
+            break
+        elif localtime > course_time(course[3]) and (i <= len(list2)-2 and localtime < course_time(list2[i+1][3])):
             mycourse = list2[i+1]
+            break
 
     return mycourse
 

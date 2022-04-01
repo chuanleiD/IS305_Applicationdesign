@@ -26,11 +26,12 @@ def readtxt(filename="course_txt\\course.txt"):
 
                 if line.find("-") != -1 and len(line) < 10:
                     time = line
-                if (line.find("◇") != -1 or line.find("●") != -1 or line.find("○") != -1 or line.find("★") != -1 or line.find("▲") != -1 or line.find("☆") != -1) and len(line) < 20:
+                if (line.find("◇") != -1 or line.find("●") != -1 or line.find("○") != -1 or line.find("★") != -1 or line.find("▲") != -1 or line.find("☆") != -1) \
+                        and (len(line) < 20 or line.find("周数：") != -1):
                     course_list.append(week + "@" + time + "@" + line)
                     course_num += 1
                 if line.find("周数：") != -1:
-                    course_list[course_num] = course_list[course_num] + line[line.find("周数："):]
+                    course_list[course_num] = course_list[course_num] + line
     read_file.close()
 
     return course_list
@@ -66,7 +67,7 @@ def get_db(filename="course_txt\\course.txt"):
 
         s1 = course.find("周数")
         s2 = course.find("-", s1, s1+6)
-        s3 = course.find("周", s1+2, s1+8)
+        s3 = course.find("周", s1+2, s1+10)
 
         if s2 != -1:
             start_week = int(course[s1+3:s2])
@@ -76,7 +77,7 @@ def get_db(filename="course_txt\\course.txt"):
             end_week = int(course[s1 + 3:s3])
 
         meeting_number = course[course.find("腾讯会议号：")+6:course.find("；密码：")]
-        meeting_password = course[course.find("密码：")+3:course.find("课程学时组成")-1]
+        meeting_password = course[course.find("密码：")+3:course.find("密码：")+7]
 
         if course[course.find("校区：闵行")-3] == "单":
             single_or_double_week = 1
