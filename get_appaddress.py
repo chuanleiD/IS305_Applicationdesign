@@ -10,16 +10,17 @@ def address():
     directory = "C:\\Users\\" + user_name + "\\Desktop"
 
     shell = Dispatch('wScript.shell')
-    address = "C:\\软件\腾讯会议\\WeMeet\\wemeetapp.exe"
+    address = "C:\\软件\\腾讯会议\\WeMeet\\wemeetapp.exe"
 
+    result = 0
     for fn in listdir(directory):
         if fn.endswith('.lnk'):
             link = join(directory, fn)
             if link.find("腾讯会议") != -1:
                 address = shell.CreateShortCut(link).Targetpath
+                result = 1
 
-
-    return address
+    return [address, result]
 
 
 

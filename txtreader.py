@@ -117,7 +117,7 @@ def meeting_reader(filepath = "配置文件\\meeting.txt"):
 
     data = [meeting_time, meeting_date, number, password]
     database.meeting_insert(data)
-    return([meeting_time, meeting_date, number, password])
+    return
 
 
 

@@ -48,20 +48,54 @@ def decide_course(college_start='20220214'):
 
 
 # 决定会议打开哪个
-def decide_meeting():
+def decide_background(college_start='20220214', if_read=0):
+
+    result_course = 0
+    if ~if_read:
+        mylist = database.read_db()
+        week_now = gettime.get_week(college_start)
+        localtime = gettime.get_time()
+        weekday = gettime.get_weekday()
+
+        list2 = []
+        mycourse = mylist[0]
+        for course in mylist:
+            if course[4] == weekday and week_now >= course[5] and week_now <= course[6]:
+                if course[9] == 0 or (course[9] == 1 and week_now % 2 == 1) or (course[9] == 2 and week_now % 2 == 0):
+                    list2.append(course)
+
+        for i in range(0, len(list2), 1):
+            course = list2[i]
+            if (course_time(course[3])-localtime) < 5:
+                mycourse = course
+                result_course = 1
+
+
     mylist = database.meeting_read_db()
-    result = 0
+    result_meeting = 0
     today = gettime.get_day()
-    mytime = database.get_time()
+    mytime = gettime.get_time()
 
     mymeeting = mylist[0]
     for meeting in mylist:
-        if meeting[2] == today and meeting[1]-mytime < 10:
+        if meeting[2] == today and meeting[1]-mytime < 5:
             mymeeting = meeting
-            result = 1
+            result_meeting = 1
             break
 
-    return [result, mymeeting]
+
+    result = result_meeting*2 + result_course
+    if result_meeting:
+        id = mymeeting[3]
+        key = mymeeting[4]
+    elif result_course:
+        id = mycourse[7]
+        key = mycourse[8]
+    else:
+        id = mymeeting[3]
+        key = mymeeting[4]
+
+    return [result, id, key]
 
 
 
