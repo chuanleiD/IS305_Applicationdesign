@@ -1,7 +1,12 @@
+'''
+配置信息相关操作
+'''
+
 import get_appaddress
 
-
+#----------------------------------------------------------------------------------------
 # 获取配置信息
+# 返回：开学时间、文件地址、EXE位置、等待时间、是否写入课程
 def configuration_information():
     mylist = []
     with open("配置文件\\config.txt", encoding='utf-8') as read_file:  # 打开文件
@@ -23,12 +28,13 @@ def configuration_information():
 
     b = (college_start, filename, app_address, wait_time, ifread)
     return b
+#----------------------------------------------------------------------------------------
 
-
+#----------------------------------------------------------------------------------------
 # 标注课程已写入
 def write():
     mylist = ""
-    with open("配置文件\\config.txt", encoding='utf-8') as read_file:  # 打开文件
+    with open("配置文件\\config.txt", encoding='utf-8') as read_file:
         for line in read_file:
             mylist += line
     read_file.close()
@@ -36,8 +42,9 @@ def write():
     mylist += ("\n" + "课程状态：已写入")
     with open("配置文件\\config.txt", "w", encoding='utf-8') as f:
         f.write(mylist)  # 自带文件关闭功能，不需要再写f.close()
+#----------------------------------------------------------------------------------------
 
-
+#----------------------------------------------------------------------------------------
 # app_address 数据初始化
 def config_initialization():
     mylist = ""
@@ -54,9 +61,11 @@ def config_initialization():
         f.write(mylist)  # 自带文件关闭功能，不需要再写f.close()
 
     return result
+#----------------------------------------------------------------------------------------
 
-
-
+#----------------------------------------------------------------------------------------
+# 更新当前配置信息
+# 输入：new_config列表
 def update_configuration(new_config):
     college_start = new_config[0]
     app_address = new_config[1]
@@ -76,10 +85,13 @@ def update_configuration(new_config):
     read_file.close()
 
     with open("配置文件\\config.txt", "w", encoding='utf-8') as f:
-        f.write(mylist)  # 自带文件关闭功能，不需要再写f.close()
+        # 自带文件关闭功能，不需要再写f.close()
+        f.write(mylist)
+#----------------------------------------------------------------------------------------
 
-
-
+#----------------------------------------------------------------------------------------
+# 软件首次打开的判断函数
+# 首次打开返回1，否则返回0
 def first_configuration():
     result = 0
 
@@ -91,4 +103,4 @@ def first_configuration():
     read_file.close()
 
     return result
-
+#----------------------------------------------------------------------------------------
