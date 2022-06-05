@@ -15,6 +15,10 @@ from Background_Start import background_start
 # 全局变量用于后台运行时的控制
 global run_symbol
 
+
+#pyinstaller -w -i E:\Python_projects\Applicationdesign\配置文件\logo3.ico -n 网课助手 E:\Python_projects\Applicationdesign\Front_end_design.py
+
+
 #----------------------------------------------------------------------------------------
 # 程序主界面，用于选择几种不同的操作
 def mybegin():

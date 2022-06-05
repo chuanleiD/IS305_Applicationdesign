@@ -7,7 +7,7 @@ from softconfig import write
 from txtreader import get_db
 from decidecourse import decide_course
 from autoclick import signIn
-#打包命令 pyinstaller -w -i E:\Python_projects\应用软件课程设计\logo3.ico -n 网课助手 E:\Python_projects\应用软件课程设计\main.py
+#打包命令 pyinstaller -w -i E:\Python_projects\Applicationdesign\配置文件\logo3.ico -n 网课助手 E:\Python_projects\Applicationdesign\Front_end_design.py
 
 #----------------------------------------------------------------------------------------
 # 立刻打开腾讯会议，选择最近的课程打开
