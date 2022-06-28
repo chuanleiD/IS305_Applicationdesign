@@ -1,7 +1,6 @@
 # IS305_Applicationdesign
-<img src="https://i0.hdslb.com/bfs/album/1f91784b6e6ae1825177bcfe5dcaf01b9c1b8900.png" alt="yjtp" style="zoom:33%;" />
+上海交通大学网课（腾讯会议）助手
 
-## 上海交通大学网课（腾讯会议）助手
 
 具体介绍请见：
 
